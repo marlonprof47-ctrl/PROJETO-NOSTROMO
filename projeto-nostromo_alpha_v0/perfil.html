@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <!-- Link para o seu CSS de perfil -->
+    <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- O JavaScript irá preencher este h1 -->
+            <h1 id="profile-name">Carregando Perfil...</h1>
+            <!-- O JavaScript irá preencher este p -->
+            <p id="profile-email">...</p>
+        </header>
+
+        <main>
+            <div class="profile-info">
+                <h2>Informações da Conta</h2>
+                <div class="info-item">
+                    <strong>Nome:</strong>
+                    <!-- O JS preenche aqui -->
+                    <span id="info-name">...</span>
+                </div>
+                <div class="info-item">
+                    <strong>Email:</strong>
+                    <!-- O JS preenche aqui -->
+                    <span id="info-email">...</span>
+                </div>
+                <div class="info-item">
+                    <strong>Tipo de Conta:</strong>
+                    <!-- O JS preenche aqui -->
+                    <span id="info-type">...</span>
+                </div>
+            </div>
+
+            <!-- NOVOS BOTÕES DE AÇÃO -->
+            <div class="actions-container">
+                <!-- Botão de Sair (Logout) -->
+                <button id="logout-button" class="btn btn-logout">Sair (Logout)</button>
+                
+                <!-- Botão de Excluir Conta -->
+                <button id="delete-button" class="btn btn-delete">Excluir Conta</button>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <nav class="bottom-nav">
+            <!-- Link Home -->
+            <a href="main.html">
+                <div class="nav-icon">🏠</div>
+                <span>Home</span>
+            </a>
+            <!-- Link Notas (Placeholder) -->
+            <a href="#" id="nav-notas-perfil">
+                <div class="nav-icon">🎓</div>
+                <span>Notas</span>
+            </a>
+            <!-- Link Salas -->
+            <a href="salas.html">
+                <div class="nav-icon">👥</div>
+                <span>Salas</span>
+            </a>
+            <!-- Link Perfil (Ativo) -->
+            <a href="perfil.html" class="active">
+                <div class="nav-icon">👤</div>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- SCRIPT DE AUTENTICAÇÃO E LÓGICA DA PÁGINA -->
+    <script>
+        // Espera o DOM (a página) carregar
+        document.addEventListener("DOMContentLoaded", async () => {
+            
+            // --- 1. VERIFICAÇÃO DE AUTENTICAÇÃO E CARREGAMENTO DE DADOS ---
+            let currentUserEmail = null; // Vamos guardar o email para a função de exclusão
+            let currentUserType = null;  // Vamos guardar o tipo para a função de exclusão
+
+            try {
+                // Tenta buscar os dados do perfil (enviando o cookie automaticamente)
+                const response = await fetch("http://127.0.0.1:5000/api/profile", {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include" // ESSENCIAL para enviar o cookie HttpOnly
+                });
+
+                if (response.ok) {
+                    // Se o cookie for válido (OK 200)
+                    const userData = await response.json();
+                    
+                    // Guarda os dados para uso posterior (na exclusão)
+                    currentUserEmail = userData.email;
+                    currentUserType = userData.user_type;
+
+                    // Preenche todos os campos na página
+                    document.getElementById("profile-name").textContent = `Perfil de ${userData.name}`;
+                    document.getElementById("profile-email").textContent = userData.email;
+                    document.getElementById("info-name").textContent = userData.name;
+                    document.getElementById("info-email").textContent = userData.email;
+                    // Converte 'student'/'teacher' para um formato amigável
+                    document.getElementById("info-type").textContent = userData.user_type === 'student' ? 'Estudante' : 'Professor';
+                
+                } else {
+                    // Se o cookie for inválido ou inexistente (401, etc)
+                    console.log("Não autenticado. Redirecionando para login.");
+                    window.location.href = "index.html"; // Redireciona para o login
+                }
+            } catch (error) {
+                // Erro de rede (servidor offline, etc)
+                console.error("Erro de conexão ao buscar perfil:", error);
+                // Redireciona se não conseguir conectar
+                window.location.href = "index.html";
+            }
+
+            // --- 2. LÓGICA DO BOTÃO DE LOGOUT ---
+            const logoutButton = document.getElementById("logout-button");
+            if (logoutButton) {
+                logoutButton.addEventListener("click", async () => {
+                    try {
+                        // Chama a API de logout
+                        await fetch("http://127.0.0.1:5000/api/logout", {
+                            method: "POST",
+                            credentials: "include" // Envia o cookie para o servidor invalidar
+                        });
+                    } catch (error) {
+                        console.error("Erro ao fazer logout:", error);
+                    } finally {
+                        // Independentemente do resultado da API, limpa o front-end e redireciona
+                        console.log("Logout efetuado. Redirecionando.");
+                        window.location.href = "index.html";
+                    }
+                });
+            }
+
+            // --- 3. LÓGICA DO BOTÃO DE EXCLUIR CONTA ---
+            const deleteButton = document.getElementById("delete-button");
+            if (deleteButton) {
+                deleteButton.addEventListener("click", async () => {
+                    
+                    // Pede confirmação dupla
+                    const confirmDelete = confirm("ATENÇÃO!\nTem certeza que deseja excluir sua conta?\n\nEsta ação é irreversível e todos os seus dados serão perdidos.");
+                    
+                    if (confirmDelete && currentUserEmail && currentUserType) {
+                        try {
+                            // Chama a nova API de exclusão (DELETE)
+                            const response = await fetch("http://127.0.0.1:5000/api/delete-account", {
+                                method: "DELETE",
+                                credentials: "include" // Envia o cookie para autenticação
+                            });
+
+                            if (response.ok) {
+                                // Se a exclusão foi OK (200)
+                                alert("Conta excluída com sucesso.");
+                                console.log("Conta excluída. Redirecionando.");
+                                window.location.href = "index.html"; // Redireciona
+                            } else {
+                                // Se deu erro (401, 500...)
+                                const errorData = await response.json();
+                                alert(`Erro ao excluir a conta: ${errorData.error}`);
+                            }
+                        } catch (error) {
+                            console.error("Erro na requisição de exclusão:", error);
+                            alert("Erro de conexão ao tentar excluir a conta.");
+                        }
+                    } else if (!confirmDelete) {
+                        // Usuário cancelou
+                        alert("Exclusão cancelada.");
+                    }
+                });
+            }
+
+            // --- 4. Lógica do placeholder "Notas" ---
+            const navNotas = document.getElementById("nav-notas-perfil");
+            if (navNotas) {
+                navNotas.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    alert("Módulo de Notas em construção!");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

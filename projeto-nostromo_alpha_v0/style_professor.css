@@ -1,0 +1,109 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container principal */
+.login-container {
+    background-color: #f6fafe;
+    padding: 40px 30px;
+    border-radius: 10px;
+    width: 320px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+/* Inputs */
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #e7eef8;
+    font-size: 14px;
+}
+
+/* Link "Esqueceu a senha?" */
+.forgot-password {
+    display: block;
+    text-align: left;
+    font-size: 13px;
+    color: #3f4e8c;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Botão Entrar */
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #1677ff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: #0f62d1;
+}
+
+/* Link de criação de conta */
+.signup-link {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.signup-link a {
+    text-decoration: none;
+    color: #3f4e8c;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/*modo dark*/
+@media (prefers-color-scheme: dark) {
+      body {
+        background-color: #121212;
+        color: #ffffff;
+      }
+
+      .login-box {
+        background-color: #1e1e1e;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      }
+
+      input, button {
+        background-color: #333;
+        color: #fff;
+        border: 1px solid #555;
+      }
+    }

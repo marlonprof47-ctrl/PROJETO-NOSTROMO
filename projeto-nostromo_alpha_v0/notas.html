@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Notas</title>
+    
+    <!-- Importando a fonte Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Link para o CSS da página de notas (que criaremos a seguir) -->
+    <link rel="stylesheet" href="notas.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- Botão "Voltar" que leva para o main.html -->
+            <a href="main.html" class="back-button">
+                <span>&larr;</span> Voltar
+            </a>
+            <h1>Minhas Notas</h1>
+            <p>Curso: Ciência da Computação</p>
+        </header>
+
+        <main>
+            <!-- Tabela de Notas -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>P1</th>
+                            <th>P2</th>
+                            <th>Média</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <!-- O corpo da tabela será preenchido pelo JavaScript -->
+                    <tbody id="grades-table-body">
+                        <!-- Indicador de carregamento -->
+                        <tr>
+                            <td colspan="5" style="text-align: center;">Carregando notas...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <nav class="bottom-nav">
+            <a href="main.html">
+                <div class="nav-icon">🏠</div>
+                <span>Home</span>
+            </a>
+            
+            <!-- Item "Notas" está ativo nesta página -->
+            <a href="notas.html" class="active">
+                <div class="nav-icon">🎓</div>
+                <span>Notas</span>
+            </a>
+            
+            <a href="salas.html">
+                <div class="nav-icon">👥</div>
+                <span>Salas</span>
+            </a>
+            <a href="perfil.html">
+                <div class="nav-icon">👤</div>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- Script de Proteção e Carregamento de Notas -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tableBody = document.getElementById('grades-table-body');
+
+            // Função para buscar e preencher as notas
+            async function fetchGrades() {
+                try {
+                    const response = await fetch('/api/grades', {
+                        method: 'GET',
+                        credentials: 'include' // Envia o cookie de sessão
+                    });
+
+                    if (response.status === 401) {
+                        window.location.href = 'index.html'; // Expulsa se não logado
+                        return Promise.reject('Token inválido');
+                    }
+                    if (!response.ok) {
+                        return Promise.reject('Erro no servidor ao buscar notas');
+                    }
+                    
+                    const grades = await response.json();
+                    
+                    // Limpa a tabela antes de preencher
+                    tableBody.innerHTML = '';
+                    
+                    if (!grades || grades.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Nenhuma nota encontrada.</td></tr>';
+                        return;
+                    }
+
+                    // Itera sobre as notas e cria as linhas da tabela
+                    grades.forEach(grade => {
+                        const row = document.createElement('tr');
+                        
+                        // Define a classe de estilo para o status
+                        let statusClass = '';
+                        if (grade.status) { // Verifica se status existe
+                            switch (grade.status.toLowerCase()) {
+                                case 'aprovado':
+                                    statusClass = 'status-aprovado';
+                                    break;
+                                case 'exame':
+                                    statusClass = 'status-exame';
+                                    break;
+                                case 'reprovado':
+                                    statusClass = 'status-reprovado';
+                                    break;
+                                case 'cursando':
+                                    statusClass = 'status-cursando';
+                                    break;
+                            }
+                        }
+
+                        // Preenche a linha com os dados
+                        row.innerHTML = `
+                            <td>${grade.disciplina || '-'}</td>
+                            <td>${(grade.p1 || 0).toFixed(1)}</td>
+                            <td>${(grade.p2 || 0).toFixed(1)}</td>
+                            <td>${(grade.media || 0).toFixed(1)}</td>
+                            <td><span class="${statusClass}">${grade.status || '-'}</span></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                } catch (error) {
+                    console.error('Erro ao buscar notas:', error);
+                    if (tableBody) {
+                        tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Erro ao carregar notas.</td></tr>';
+                    }
+                }
+            }
+
+            // 1. Primeiro, verifica se o usuário está logado (proteção de rota)
+            fetch('/api/profile', {
+                method: 'GET',
+                credentials: 'include'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    // Se não estiver OK (ex: 401), expulsa para o login
+                    window.location.href = 'index.html';
+                    return Promise.reject('Não autenticado');
+                }
+                // 2. Se estiver logado, busca as notas
+                fetchGrades();
+            })
+            .catch(error => {
+                console.error('Erro de autenticação:', error);
+                // Evita loop infinito se já estiver no index.html
+                if (window.location.pathname.endsWith('/index.html') === false) {
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+/* Estilo geral - MODO LIGHT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2b2140;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.container {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  padding: 20px 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #2b2140;
+  font-weight: 600;
+}
+
+header p {
+  color: #0077cc;
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+/* --- ESTILOS PARA TABELA (LIGHT) --- */
+.table-container {
+  margin-top: 20px;
+}
+
+.btn-back {
+  display: inline-block;
+  margin-bottom: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #6a4cff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-back:hover {
+  text-decoration: underline;
+}
+
+.rooms-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.rooms-table th,
+.rooms-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.rooms-table th {
+  background-color: #f5f7fa;
+  font-size: 0.9rem;
+  color: #6a4cff;
+  text-transform: uppercase;
+}
+
+.rooms-table td {
+  font-size: 0.95rem;
+  color: #2b2140;
+}
+
+.rooms-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Barra inferior de navegação */
+footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+  padding: 5px;
+}
+
+.bottom-nav a .nav-icon {
+  font-size: 1.4rem;
+}
+
+.bottom-nav a.active {
+  color: #6a4cff;
+}
+
+.bottom-nav a:hover {
+  color: #8d6cff;
+}
+
+/* --- MODO DARK --- */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2b2140;
+    color: white;
+  }
+
+  .container {
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.445);
+  }
+
+  header h1 {
+    color: white;
+  }
+
+  header p {
+    color: #5ec5ff;
+  }
+  
+  /* --- ESTILOS PARA TABELA (DARK) --- */
+  .btn-back {
+    color: #8d6cff;
+  }
+  
+  .rooms-table {
+    background-color: #3c2d55;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .rooms-table th,
+  .rooms-table td {
+    border-bottom: 1px solid #2b2140;
+  }
+  
+  .rooms-table th {
+    background-color: #2b2140;
+    color: #9d6bff;
+  }
+  
+  .rooms-table td {
+    color: #f0f0f0;
+  }
+
+  /* Footer */
+  footer {
+    background-color: #2b2140;
+    border-top: 1px solid #3c2d55;
+  }
+
+  .bottom-nav a {
+    color: #80d0ff;
+  }
+
+  .bottom-nav a.active {
+    color: #9d6bff;
+  }
+
+  .bottom-nav a:hover {
+    color: #b78cff;
+  }
+}

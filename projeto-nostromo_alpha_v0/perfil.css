@@ -1,0 +1,248 @@
+/* Estilo geral - MODO LIGHT */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f5f7fa; /* Fundo claro suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #2b2140; /* Texto escuro principal */
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Container e header */
+.container {
+    width: 100%;
+    max-width: 480px; /* Largura máxima para manter a aparência de app */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 20px;
+}
+
+header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    color: #2b2140;
+    font-weight: 600;
+}
+
+header p {
+    color: #0077cc; /* Azul leve para contraste */
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+/* Conteúdo principal */
+main {
+    padding: 20px 0;
+}
+
+.profile-info {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.profile-info h2 {
+    font-size: 1.2rem;
+    color: #2b2140;
+    font-weight: 600;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+.info-item {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-item strong {
+    color: #555;
+    margin-right: 10px;
+}
+
+.info-item span {
+    color: #2b2140;
+    font-weight: 500;
+    word-break: break-all; /* Para emails longos não quebrarem o layout */
+}
+
+/* Botões de Ação */
+.actions-container {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espaço entre os botões */
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Botão de Logout (NOVO) */
+.btn-logout {
+    background-color: #ffc107; /* Amarelo/Laranja */
+    color: #333;
+}
+
+.btn-logout:hover {
+    background-color: #ffca2c;
+}
+
+/* Botão de Excluir */
+.btn-delete {
+    background-color: #dc3545; /* Vermelho perigo */
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #e04b59;
+}
+
+
+/* Barra inferior de navegação */
+footer {
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+    width: 100%;
+    max-width: 480px; /* Garante que o footer tenha a mesma largura */
+    position: fixed;
+    bottom: 0;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: #555;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s;
+    padding: 5px 10px;
+}
+
+.bottom-nav a .nav-icon {
+    font-size: 1.4rem;
+}
+
+.bottom-nav a.active {
+    color: #6a4cff; /* Roxo ativo */
+}
+
+.bottom-nav a:hover {
+    color: #8d6cff;
+}
+
+/* --- MODO DARK --- */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #2b2140; /* Roxo escuro de fundo */
+        color: #f0f0f0; /* Texto claro */
+    }
+
+    .container {
+        background-color: #2b2140;
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.445);
+    }
+
+    header {
+        border-bottom: 1px solid #3c2d55;
+    }
+
+    header h1 {
+        color: white;
+    }
+
+    header p {
+        color: #5ec5ff;
+    }
+
+    .profile-info {
+        background-color: #3c2d55; /* Cor de card escura */
+        border: 1px solid #4a386a;
+    }
+
+    .profile-info h2 {
+        color: white;
+        border-bottom: 1px solid #4a386a;
+    }
+
+    .info-item strong {
+        color: #bbb;
+    }
+
+    .info-item span {
+        color: #f0f0f0;
+    }
+
+    /* Botões */
+    .btn-logout {
+        background-color: #ffc107;
+        color: #2b2140; /* Texto escuro para contraste no amarelo */
+    }
+
+    .btn-logout:hover {
+        background-color: #ffd659;
+    }
+
+    .btn-delete {
+        background-color: #e04b59; /* Vermelho mais vibrante no escuro */
+        color: white;
+    }
+    
+    .btn-delete:hover {
+        background-color: #f15a69;
+    }
+    
+    /* Navegação inferior */
+    footer {
+        background-color: #2b2140;
+        border-top: 1px solid #3c2d55;
+    }
+
+    .bottom-nav a {
+        color: #80d0ff; /* Azul claro */
+    }
+
+    .bottom-nav a.active {
+        color: #9d6bff; /* Roxo claro */
+    }
+
+    .bottom-nav a:hover {
+        color: #b78cff;
+    }
+}

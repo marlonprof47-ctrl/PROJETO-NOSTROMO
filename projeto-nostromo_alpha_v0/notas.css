@@ -1,0 +1,235 @@
+/*
+ * NOTAS.CSS
+ * Estilos para a página de notas, baseado no salas.css
+ */
+
+/* --- Configurações Globais (Light Mode) --- */
+:root {
+    --cor-fundo: #f5f7fa;
+    --cor-container-fundo: #ffffff;
+    --cor-texto-principal: #2b2140;
+    --cor-texto-secundario: #555;
+    --cor-sombra: rgba(0, 0, 0, 0.1);
+    --cor-borda: #e0e0e0;
+    --cor-primaria: #6a4cff;
+    --cor-primaria-hover: #8d6cff;
+    --cor-texto-link-header: #0077cc;
+    --cor-fundo-tabela-header: #f9f9f9;
+    
+    /* Cores de Status */
+    --cor-status-aprovado: #28a745;
+    --cor-status-exame: #ffc107;
+    --cor-status-reprovado: #dc3545;
+    --cor-status-cursando: #17a2b8;
+    --cor-texto-status: #ffffff;
+}
+
+/* --- Dark Mode --- */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --cor-fundo: #2b2140;
+        --cor-container-fundo: #362a52;
+        --cor-texto-principal: #ffffff;
+        --cor-texto-secundario: #c0c0c0;
+        --cor-sombra: rgba(255, 255, 255, 0.1);
+        --cor-borda: #3c2d55;
+        --cor-primaria: #9d6bff;
+        --cor-primaria-hover: #b78cff;
+        --cor-texto-link-header: #5ec5ff;
+        --cor-fundo-tabela-header: #4a3a6f;
+        
+        /* Cores de Status (mais claras para fundo escuro) */
+        --cor-status-aprovado: #34d399;
+        --cor-status-exame: #fcd34d;
+        --cor-status-reprovado: #f87171;
+        --cor-status-cursando: #67e8f9;
+        --cor-texto-status: #1a1a2e;
+    }
+}
+
+/* --- Estilos Gerais --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--cor-fundo);
+    display: flex;
+    justify-content: flex-start; /* Alinha container ao topo */
+    align-items: center;
+    color: var(--cor-texto-principal);
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* --- Layout Principal --- */
+.container {
+    width: 100%;
+    max-width: 600px; /* Largura máxima para legibilidade */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--cor-container-fundo);
+    box-shadow: 0 4px 12px var(--cor-sombra);
+}
+
+main {
+    flex: 1; /* Faz o main crescer e empurra o footer para baixo */
+    padding: 20px;
+}
+
+/* --- Header --- */
+header {
+    padding: 20px;
+    border-bottom: 1px solid var(--cor-borda);
+    position: relative;
+}
+
+header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--cor-texto-principal);
+    margin-top: 10px; /* Espaço para o botão voltar */
+}
+
+header p {
+    color: var(--cor-texto-link-header);
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: var(--cor-primaria);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.back-button:hover {
+    color: var(--cor-primaria-hover);
+}
+.back-button span {
+    font-size: 1.2rem;
+    margin-right: 5px;
+}
+
+/* --- Estilos da Tabela de Notas --- */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal em telas pequenas */
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse; /* Bordas unidas */
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+thead {
+    background-color: var(--cor-fundo-tabela-header);
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+th {
+    font-weight: 600;
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:last-child td {
+    border-bottom: none; /* Remove borda do último item */
+}
+
+tbody tr:hover {
+    background-color: var(--cor-fundo-tabela-header);
+}
+
+td:nth-child(2), /* P1 */
+td:nth-child(3), /* P2 */
+td:nth-child(4) { /* Média */
+    font-weight: 600;
+    text-align: center;
+}
+
+/* --- Estilos de Status --- */
+.status-aprovado,
+.status-exame,
+.status-reprovado,
+.status-cursando {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--cor-texto-status);
+    display: inline-block;
+    min-width: 80px; /* Largura mínima para alinhamento */
+    text-align: center;
+}
+
+.status-aprovado {
+    background-color: var(--cor-status-aprovado);
+}
+.status-exame {
+    background-color: var(--cor-status-exame);
+    color: #333; /* Texto escuro para contraste com amarelo */
+}
+.status-reprovado {
+    background-color: var(--cor-status-reprovado);
+}
+.status-cursando {
+    background-color: var(--cor-status-cursando);
+}
+
+
+/* --- Footer e Navegação Inferior --- */
+footer {
+    width: 100%;
+    max-width: 600px;
+    background-color: var(--cor-container-fundo);
+    border-top: 1px solid var(--cor-borda);
+    position: sticky;
+    bottom: 0;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.bottom-nav a {
+    text-decoration: none;
+    color: var(--cor-texto-secundario);
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: color 0.3s;
+    padding: 5px 10px;
+}
+
+.bottom-nav a .nav-icon {
+    font-size: 1.4rem;
+    margin-bottom: 2px;
+}
+
+.bottom-nav a.active {
+    color: var(--cor-primaria); /* Cor do item ativo */
+}
+
+.bottom-nav a:hover {
+    color: var(--cor-primaria-hover);
+}

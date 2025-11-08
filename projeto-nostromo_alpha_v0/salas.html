@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Salas - Painel Acadêmico</title>
+  
+  <!-- Importando a fonte Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Chamando o arquivo CSS externo -->
+  <link rel="stylesheet" href="salas.css">
+
+</head>
+<body>
+  
+  <div class="container">
+<!-- ... (O restante do HTML permanece exatamente o mesmo) ... -->
+    <header>
+      <h1 id="header-title">Salas Cadastradas</h1>
+      <p id="header-subtitle">Horários e professores disponíveis.</p>
+    </header>
+
+    <main>
+      <!-- 
+        TABELA DE SALAS (Visível) 
+      -->
+      <div id="view-salas">
+        <div class="table-container">
+          
+          <!-- Botão de Voltar -->
+          <a href="main.html" class="btn-back">&larr; Voltar para Home</a>
+
+          <table class="rooms-table">
+            <thead>
+              <tr>
+                <th>Sala</th>
+                <th>Professor</th>
+                <th>Horário</th>
+                <th>Curso</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Dados de Exemplo -->
+              <tr>
+                <td>B-201</td>
+                <td>Dr. Silva</td>
+                <td>08:00 - 10:00</td>
+                <td>Eng. Software</td>
+              </tr>
+              <tr>
+                <td>A-105</td>
+                <td>Profa. Maria</td>
+                <td>10:00 - 12:00</td>
+                <td>Ciência da Comput.</td>
+              </tr>
+              <tr>
+                <td>C-303</td>
+                <td>Prof. Carlos</td>
+                <td>14:00 - 16:00</td>
+                <td>Eng. Mecatrônica</td>
+              </tr>
+              <tr>
+                <td>LAB-04</td>
+                <td>Profa. Ana</td>
+                <td>19:00 - 21:00</td>
+                <td>Análise de Sist.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <nav class="bottom-nav">
+      <!-- "Home" não está ativo -->
+      <a href="main.html" id="nav-home">
+        <div class="nav-icon">🏠</div>
+        <span>Home</span>
+      </a>
+      <a href="#" id="nav-notas">
+        <div class="nav-icon">🎓</div>
+        <span>Notas</span>
+      </a>
+      <!-- "Salas" é o ativo -->
+      <a href="#" class="active" id="nav-salas">
+        <div class="nav-icon">👥</div>
+        <span>Salas</span>
+      </a>
+      <a href="perfil.html">
+        <div class="nav-icon">👤</div>
+        <span>Perfil</span>
+      </a>
+    </nav>
+  </footer>
+
+  <!-- 
+    SCRIPT (Opcional, apenas para o botão de Notas)
+  -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navNotas = document.getElementById('nav-notas');
+      if (navNotas) {
+        navNotas.addEventListener('click', (e) => {
+          e.preventDefault();
+          alert('A seção "Notas" ainda será implementada.');
+        });
+      }
+    });
+  </script>
+</body>
+</html>

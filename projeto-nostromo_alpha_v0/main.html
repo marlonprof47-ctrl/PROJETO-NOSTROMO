@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Acadêmico</title>
+  
+  <!-- Importando a fonte Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Linkando ao arquivo main.css externo -->
+  <link rel="stylesheet" href="main.css">
+  
+</head>
+<body>
+    <div class="container">
+        <header>
+            <!-- O JavaScript irá preencher este h1 -->
+            <h1 id="welcome-message">Carregando...</h1>
+            <p>Acesse seus recursos acadêmicos.</p>
+        </header>
+
+        <main>
+            <div class="cards">
+                <!-- Card de Notas (com alerta JS) -->
+                <div class="card notas" id="card-notas">
+                    <div class="icon">🎓</div>
+                    <h2>Notas</h2>
+                    <p>Suas notas</p>
+                </div>
+
+                <!-- Card de Salas (Link para salas.html) -->
+                <a href="salas.html" class="card-link">
+                    <div class="card salas">
+                        <div class="icon">👥</div>
+                        <h2>Salas</h2>
+                        <p>Salas de aula</p>
+                    </div>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <nav class="bottom-nav">
+            <!-- Link Home (Ativo) -->
+            <a href="main.html" class="active">
+                <div class="nav-icon">🏠</div>
+                <span>Home</span>
+            </a>
+            <!-- Link Notas (com alerta JS) -->
+            <a href="#" id="nav-notas">
+                <div class="nav-icon">🎓</div>
+                <span>Notas</span>
+            </a>
+            <!-- Link Salas -->
+            <a href="salas.html">
+                <div class="nav-icon">👥</div>
+                <span>Salas</span>
+            </a>
+            <!-- Link Perfil (NOVO) -->
+            <a href="perfil.html">
+                <div class="nav-icon">👤</div>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </footer>
+
+    <!-- SCRIPT DE AUTENTICAÇÃO E LÓGICA DA PÁGINA -->
+    <script>
+        // Espera o DOM (a página) carregar
+        document.addEventListener("DOMContentLoaded", async () => {
+            const welcomeMessage = document.getElementById("welcome-message");
+            
+            // --- 1. VERIFICAÇÃO DE AUTENTICAÇÃO ---
+            try {
+                // Tenta buscar os dados do perfil.
+                // 'credentials: "include"' é ESSENCIAL para enviar o cookie HttpOnly
+                const response = await fetch("http://127.0.0.1:5000/api/profile", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    // Esta linha diz ao navegador para enviar o cookie seguro (HttpOnly)
+                    credentials: "include" 
+                });
+
+                if (response.ok) {
+                    // Se o cookie for válido (OK 200)
+                    const userData = await response.json();
+                    // Preenche a mensagem de boas-vindas
+                    welcomeMessage.textContent = `Bem-vindo(a), ${userData.name}!`;
+                
+                } else {
+                    // Se o cookie for inválido ou inexistente (401, 404, etc)
+                    // Redireciona para o login
+                    console.log("Não autenticado. Redirecionando para login.");
+                    window.location.href = "index.html"; 
+                }
+            } catch (error) {
+                // Erro de rede (servidor offline, etc)
+                console.error("Erro de conexão ao buscar perfil:", error);
+                welcomeMessage.textContent = "Erro de conexão.";
+                // Também redireciona se não conseguir conectar ao servidor
+                window.location.href = "index.html";
+            }
+
+            // --- 2. Lógica para os botões "Notas" (placeholders) ---
+            document.getElementById("card-notas").addEventListener("click", () => {
+                alert("Módulo de Notas em construção!");
+            });
+            document.getElementById("nav-notas").addEventListener("click", (e) => {
+                e.preventDefault(); // Impede o link de navegar
+                alert("Módulo de Notas em construção!");
+            });
+        });
+    </script>
+</body>
+</html>

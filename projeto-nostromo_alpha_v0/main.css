@@ -1,0 +1,195 @@
+/* Estilo geral - MODO LIGHT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #f5f7fa; /* Fundo claro suave */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #2b2140; /* Texto escuro principal */
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Container e header */
+.container {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  padding: 20px 20px;
+  width: 100%;
+  max-width: 500px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  color: #2b2140;
+  font-weight: 600;
+}
+
+header h1 span {
+  color: #6a4cff; /* Destaque roxo vibrante */
+}
+
+header p {
+  color: #0077cc; /* Azul leve para contraste */
+  font-size: 0.95rem;
+  margin-top: 5px;
+}
+
+/* Cards principais */
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* Adicionado para os links dos cards */
+.card-link {
+  text-decoration: none; /* REMOVE O SUBLINHADO */
+}
+
+.card {
+  width: 150px;
+  height: 120px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card .icon {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Cores dos cards */
+.card.notas {
+  background-color: #ffe2cc; /* Laranja claro */
+  color: #5a2d00;
+}
+
+.card.salas {
+  background-color: #cfeeff; /* Azul bebê */
+  color: #023047;
+}
+
+/* Barra inferior de navegação */
+footer {
+  background-color: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.bottom-nav a {
+  text-decoration: none;
+  color: #555;
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: color 0.3s;
+  padding: 5px;
+}
+
+.bottom-nav a .nav-icon {
+  font-size: 1.4rem;
+}
+
+.bottom-nav a.active {
+  color: #6a4cff; /* Roxo ativo */
+}
+
+.bottom-nav a:hover {
+  color: #8d6cff;
+}
+
+/* --- MODO DARK --- */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #2b2140; /* Roxo escuro de fundo */
+    color: white;
+  }
+
+  .container {
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.445);
+  }
+
+  header h1 {
+    color: white;
+  }
+
+  header h1 span {
+    color: #ffffff;
+  }
+
+  header p {
+    color: #5ec5ff;
+  }
+
+  .card.notas {
+    background-color: #ffb68f;
+    color: #3a1e0b;
+  }
+
+  .card.salas {
+    background-color: #8fd4ff;
+    color: #042a3a;
+  }
+
+  footer {
+    background-color: #2b2140;
+    border-top: 1px solid #3c2d55;
+  }
+
+  .bottom-nav a {
+    color: #80d0ff;
+  }
+
+  .bottom-nav a.active {
+    color: #9d6bff;
+  }
+
+  .bottom-nav a:hover {
+    color: #b78cff;
+  }
+}

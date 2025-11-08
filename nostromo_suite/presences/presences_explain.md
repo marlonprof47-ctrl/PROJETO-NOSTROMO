@@ -1,0 +1,1 @@
+This is the presences system folder, that contains the modules that makes this system works

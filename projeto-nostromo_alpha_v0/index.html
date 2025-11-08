@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos básicos para a mensagem de feedback */
+        #login-message {
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+
+        /* Campos "falsos" escondidos (ajudam a evitar autofill) */
+        .hidden-autofill {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <div class="radio-group">
+                <label>
+                    <input type="radio" name="tipo" value="aluno" checked> Aluno
+                </label>
+                <label>
+                    <input type="radio" name="tipo" value="professor"> Professor
+                </label>
+            </div>
+
+            <!-- Definir autocomplete="off" no form e adicionar campos falsos para "enganar" o autofill -->
+            <form id="login-form" autocomplete="off" novalidate>
+                <!-- Campos falsos para reduzir a probabilidade do navegador preencher automaticamente -->
+                <input class="hidden-autofill" type="text" name="fake-username" id="fake-username" autocomplete="username" tabindex="-1" aria-hidden="true">
+                <input class="hidden-autofill" type="password" name="fake-password" id="fake-password" autocomplete="current-password" tabindex="-1" aria-hidden="true">
+
+                <!-- Campos reais -->
+                <input
+                    type="email"
+                    id="login-email"
+                    name="email"
+                    placeholder="Email"
+                    required
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                >
+                <input
+                    type="password"
+                    id="login-password"
+                    name="password"
+                    placeholder="Senha"
+                    required
+                    autocomplete="new-password"
+                >
+                
+                <!-- Parágrafo para exibir mensagens de sucesso ou erro -->
+                <p id="login-message"></p>
+
+                <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="signup-link">
+                <!-- Link atualizado para a página de cadastro -->
+                <a href="cadastro.html">Não tem uma conta? Criar conta</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script DEFER garante que o JS só rode depois do HTML carregar -->
+    <script>
+    // Pequeno script para evitar/autolimpar autofill persistente do navegador.
+    // Estratégia:
+    // 1) Limpa valores já preenchidos.
+    // 2) Temporariamente altera o atributo autocomplete para um valor aleatório,
+    //    o que costuma impedir o browser de reaplicar o autofill.
+    // 3) Restaura para os valores desejados depois de um curto delay.
+    (function() {
+        function preventAutofill() {
+            try {
+                const email = document.getElementById('login-email');
+                const pass = document.getElementById('login-password');
+
+                // Limpar valores que já possam ter sido preenchidos
+                if (email) email.value = '';
+                if (pass) pass.value = '';
+
+                // Forçar atributos a um valor "não reconhecível" temporariamente
+                if (email) {
+                    email.setAttribute('autocomplete', 'nope-' + Math.random().toString(36).slice(2));
+                }
+                if (pass) {
+                    pass.setAttribute('autocomplete', 'nope-' + Math.random().toString(36).slice(2));
+                }
+
+                // Reverter para os atributos desejados passado um pequeno delay
+                setTimeout(function() {
+                    if (email) {
+                        email.setAttribute('autocomplete', 'off');
+                    }
+                    if (pass) {
+                        pass.setAttribute('autocomplete', 'new-password');
+                    }
+                }, 250);
+            } catch (e) {
+                // Se algo falhar, não bloqueamos o app; apenas log para depuração
+                console.warn('preventAutofill error:', e);
+            }
+        }
+
+        // Executar em DOMContentLoaded e pageshow (para lidar com bfcache/back-forward)
+        window.addEventListener('DOMContentLoaded', preventAutofill);
+        window.addEventListener('pageshow', preventAutofill);
+    })();
+    </script>
+
+    <script src="login.js" defer></script>
+</body>
+</html>

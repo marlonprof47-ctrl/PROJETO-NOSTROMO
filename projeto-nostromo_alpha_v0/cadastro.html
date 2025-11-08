@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style_cadastro.css">
+    <style>
+        /* Esconde o formulário de professor por padrão */
+        #form-professor {
+            display: none;
+        }
+        /* Estilos para a mensagem de feedback */
+        #register-message {
+            text-align: center;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        .eula-box {
+            font-size: 0.8em;
+            margin: 10px 0;
+        }
+        /* Campos "falsos" escondidos (ajudam a evitar autofill) */
+        .hidden-autofill {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <!-- Radios e labels -->
+    <input type="radio" id="radio-aluno" name="tipo" value="aluno" checked>
+    <label class="radio-label" for="radio-aluno">Aluno</label>
+
+    <input type="radio" id="radio-professor" name="tipo" value="professor">
+    <label class="radio-label" for="radio-professor">Professor</label>
+
+    <!-- Parágrafo para exibir mensagens de sucesso ou erro -->
+    <p id="register-message"></p>
+
+    <div class="form-container">
+        <!-- Formulário de Aluno -->
+        <form id="form-aluno" class="form" autocomplete="off" novalidate>
+            <!-- Campos falsos para reduzir autofill -->
+            <input class="hidden-autofill" type="text" name="fake-username-aluno" id="fake-username-aluno" autocomplete="username" tabindex="-1" aria-hidden="true">
+            <input class="hidden-autofill" type="password" name="fake-password-aluno" id="fake-password-aluno" autocomplete="current-password" tabindex="-1" aria-hidden="true">
+
+            <input type="text" id="reg-aluno-name" name="name" placeholder="Nome Completo" required autocomplete="off">
+            <input type="email" id="reg-aluno-email" name="email" placeholder="E-mail Institucional" required autocomplete="off">
+            <input type="text" id="reg-aluno-periodo" name="period" placeholder="Período" required autocomplete="off">
+            <input type="password" id="reg-aluno-pass1" name="password" placeholder="Criar Senha" required autocomplete="new-password">
+            <input type="password" id="reg-aluno-pass2" name="password_confirm" placeholder="Repetir Senha" required autocomplete="new-password">
+            <input type="text" id="reg-aluno-ra" name="ra" placeholder="RA" required autocomplete="off">
+            <input type="text" id="reg-aluno-curso" name="course" placeholder="Curso" required autocomplete="off">
+            <div class="eula-box">
+                <input type="checkbox" id="reg-aluno-eula" name="agreed_eula" required>
+                <label for="reg-aluno-eula">Eu li e aceito os termos de uso (EULA).</label>
+            </div>
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+        
+        <!-- Formulário de Professor -->
+        <form id="form-professor" class="form" autocomplete="off" novalidate>
+            <!-- Campos falsos para reduzir autofill -->
+            <input class="hidden-autofill" type="text" name="fake-username-prof" id="fake-username-prof" autocomplete="username" tabindex="-1" aria-hidden="true">
+            <input class="hidden-autofill" type="password" name="fake-password-prof" id="fake-password-prof" autocomplete="current-password" tabindex="-1" aria-hidden="true">
+
+            <input type="text" id="reg-prof-name" name="name" placeholder="Nome Completo" required autocomplete="off">
+            <input type="email" id="reg-prof-email" name="email" placeholder="E-mail Institucional" required autocomplete="off">
+            <input type="password" id="reg-prof-pass1" name="password" placeholder="Criar Senha" required autocomplete="new-password">
+            <input type="password" id="reg-prof-pass2" name="password_confirm" placeholder="Repetir Senha" required autocomplete="new-password">
+            <input type="text" id="reg-prof-reg" name="registration_number" placeholder="Cadastro" required autocomplete="off">
+            <div class="eula-box">
+                <input type="checkbox" id="reg-prof-eula" name="agreed_eula" required>
+                <label for="reg-prof-eula">Eu li e aceito os termos de uso (EULA).</label>
+            </div>
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+    </div>
+    
+    <div class="login-link">
+        <a href="index.html">Já tem uma conta? <span>Entrar</span></a>
+    </div>
+</div>
+
+<script>
+/*
+  Script anti-autofill:
+  - Limpa valores já preenchidos automaticamente
+  - Temporariamente define autocomplete para um valor aleatório (reduce autofill attempts)
+  - Reverte para os atributos desejados após um pequeno delay
+  Funciona para ambos formulários (aluno e professor) e lida com bfcache (pageshow).
+*/
+(function() {
+    function preventAutofillForForm(formId, emailInputId, passInputIds) {
+        try {
+            const form = document.getElementById(formId);
+            if (!form) return;
+
+            // Campos de email e passwords reais
+            const emailEl = document.getElementById(emailInputId);
+            const passEls = passInputIds.map(id => document.getElementById(id)).filter(Boolean);
+
+            // Limpar valores já preenchidos
+            if (emailEl) emailEl.value = '';
+            passEls.forEach(el => el.value = '');
+
+            // Temporariamente "quebrar" o autocomplete para este formulário
+            if (emailEl) emailEl.setAttribute('autocomplete', 'nope-' + Math.random().toString(36).slice(2));
+            passEls.forEach(el => el.setAttribute('autocomplete', 'nope-' + Math.random().toString(36).slice(2)));
+
+            // Reverter depois de um pequeno delay para os valores desejados
+            setTimeout(() => {
+                if (emailEl) emailEl.setAttribute('autocomplete', 'off');
+                passEls.forEach(el => el.setAttribute('autocomplete', 'new-password'));
+            }, 250);
+        } catch (e) {
+            console.warn('preventAutofillForForm error:', e);
+        }
+    }
+
+    function preventAutofill() {
+        // Aluno: email id = reg-aluno-email, senha ids = reg-aluno-pass1, reg-aluno-pass2
+        preventAutofillForForm('form-aluno', 'reg-aluno-email', ['reg-aluno-pass1', 'reg-aluno-pass2']);
+
+        // Professor: email id = reg-prof-email, senha ids = reg-prof-pass1, reg-prof-pass2
+        preventAutofillForForm('form-professor', 'reg-prof-email', ['reg-prof-pass1', 'reg-prof-pass2']);
+    }
+
+    window.addEventListener('DOMContentLoaded', preventAutofill);
+    window.addEventListener('pageshow', preventAutofill);
+})();
+</script>
+
+<script src="cadastro.js" defer></script>
+</body>
+</html>

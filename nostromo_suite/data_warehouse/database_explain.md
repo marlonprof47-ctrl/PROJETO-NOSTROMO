@@ -1,0 +1,1 @@
+This is the general database system based on SQLite3 folder and contains all of the modules that makes this works
