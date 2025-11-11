@@ -1,4 +1,6 @@
-/* Estilo geral - MODO LIGHT */
+/* ========================= */
+/* RESET E BASE              */
+/* ========================= */
 * {
   margin: 0;
   padding: 0;
@@ -7,26 +9,33 @@
 }
 
 body {
-  background-color: #f5f7fa; /* Fundo claro suave */
+  background-color: #f5f7fa;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #2b2140; /* Texto escuro principal */
   flex-direction: column;
   min-height: 100vh;
+  color: #2b2140;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Container e header */
+/* ========================= */
+/* CONTAINER E HEADER        */
+/* ========================= */
 .container {
+  background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  padding: 20px 20px;
-  width: 100%;
+  border-radius: 12px;
+  padding: 30px 25px;
+  width: 90%;
   max-width: 500px;
+  margin-bottom: 80px; /* espaço para o footer fixo */
+  transition: all 0.3s ease;
 }
 
 header {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 header h1 {
@@ -35,35 +44,32 @@ header h1 {
   font-weight: 600;
 }
 
-header h1 span {
-  color: #6a4cff; /* Destaque roxo vibrante */
-}
-
 header p {
-  color: #0077cc; /* Azul leve para contraste */
+  color: #0077cc;
   font-size: 0.95rem;
   margin-top: 5px;
 }
 
-/* Cards principais */
+/* ========================= */
+/* CARDS                     */
+/* ========================= */
 .cards {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   margin-top: 40px;
   flex-wrap: wrap;
 }
 
-/* Adicionado para os links dos cards */
 .card-link {
-  text-decoration: none; /* REMOVE O SUBLINHADO */
+  text-decoration: none;
 }
 
 .card {
-  width: 150px;
-  height: 120px;
-  border-radius: 10px;
+  width: 160px;
+  height: 130px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -74,11 +80,11 @@ header p {
 
 .card:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 .card .icon {
-  font-size: 2rem;
+  font-size: 2.2rem;
   margin-bottom: 10px;
 }
 
@@ -92,38 +98,42 @@ header p {
   color: #555;
 }
 
-/* Cores dos cards */
+/* Cores específicas */
 .card.notas {
-  background-color: #ffe2cc; /* Laranja claro */
+  background-color: #ffe2cc;
   color: #5a2d00;
 }
 
 .card.salas {
-  background-color: #cfeeff; /* Azul bebê */
+  background-color: #cfeeff;
   color: #023047;
 }
 
-/* Barra inferior de navegação */
+/* ========================= */
+/* FOOTER / NAV INFERIOR     */
+/* ========================= */
 footer {
   background-color: #ffffff;
   border-top: 1px solid #e0e0e0;
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 10;
+  transition: background-color 0.3s ease;
 }
 
 .bottom-nav {
   display: flex;
   justify-content: space-around;
   padding: 10px 0;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
 .bottom-nav a {
   text-decoration: none;
   color: #555;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -136,34 +146,76 @@ footer {
 }
 
 .bottom-nav a.active {
-  color: #6a4cff; /* Roxo ativo */
+  color: #6a4cff;
 }
 
 .bottom-nav a:hover {
   color: #8d6cff;
 }
 
-/* --- MODO DARK --- */
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: #2b2140; /* Roxo escuro de fundo */
-    color: white;
-  }
-
+/* ========================= */
+/* RESPONSIVIDADE DESKTOP    */
+/* ========================= */
+@media (min-width: 768px) {
   .container {
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.445);
+    max-width: 600px;
+    padding: 40px;
   }
 
   header h1 {
-    color: white;
+    font-size: 2rem;
   }
 
-  header h1 span {
+  .card {
+    width: 180px;
+    height: 140px;
+  }
+
+  .bottom-nav a {
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    background: linear-gradient(135deg, #eaf2ff 0%, #f8faff 100%);
+  }
+
+  .container {
+    max-width: 720px;
+    padding: 50px;
+  }
+
+  .card {
+    width: 200px;
+    height: 150px;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+}
+
+/* ========================= */
+/* MODO DARK AUTOMÁTICO      */
+/* ========================= */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1c1231;
+    color: #f0f0f0;
+  }
+
+  .container {
+    background-color: #2a1f3d;
+    box-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
+  }
+
+  header h1 {
     color: #ffffff;
   }
 
   header p {
-    color: #5ec5ff;
+    color: #6ec3ff;
   }
 
   .card.notas {
@@ -177,19 +229,19 @@ footer {
   }
 
   footer {
-    background-color: #2b2140;
+    background-color: #2a1f3d;
     border-top: 1px solid #3c2d55;
   }
 
   .bottom-nav a {
-    color: #80d0ff;
+    color: #a8a0c5;
   }
 
   .bottom-nav a.active {
-    color: #9d6bff;
+    color: #b78cff;
   }
 
   .bottom-nav a:hover {
-    color: #b78cff;
+    color: #d2b8ff;
   }
 }

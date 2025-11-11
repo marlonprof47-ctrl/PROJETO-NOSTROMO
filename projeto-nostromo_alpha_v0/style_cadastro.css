@@ -1,246 +1,65 @@
-/* Reset básico */
+/* ============================= */
+/* RESET BÁSICO */
+/* ============================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: "Segoe UI", sans-serif;
 }
 
-/* Fundo e centralização */
+/* ============================= */
+/* ESTILOS GERAIS (COMUNS AOS DOIS TEMAS) */
+/* ============================= */
 body {
-  background-color: #f9f9f9;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
-/* Botões de escolha */
-  .radio-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #e0e0e0;
-    border-radius: 5px;
-    margin: 0 10px;
-    cursor: pointer;
-    font-weight: 500;
-    transition: background-color 0.3s;
-    justify-content: center;
-  }
-  /* Quando o radio correspondente estiver selecionado */
-  input[type="radio"]:checked {
-    background-color: #6a4cff;
-    color: white;
-  }
-   .form {
-    display: none; /* escondido por padrão */
-  }
-   /* Mostra o formulário do aluno quando #radio-aluno está marcado */
-  #radio-aluno:checked ~ .form-container #form-aluno {
-    display: block;
-  }
-  /* Mostra o formulário do professor quando #radio-professor está marcado */
-  #radio-professor:checked ~ .form-container #form-professor {
-    display: block;
-  }
-   label {
-    display: block;
-    margin-top: 10px;
-    font-weight: 500;
-  }
-.form-container {
-  background-color: white;
+
+.wrapper {
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
   padding: 40px 30px;
   width: 100%;
-  max-width: 360px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-  /* Mostra o formulário do aluno quando #radio-aluno está marcado */
-  #radio-aluno:checked ~ .form-container #form-aluno {
-    display: block;
-  }
-  /* Mostra o formulário do professor quando #radio-professor está marcado */
-  #radio-professor:checked ~ .form-container #form-professor {
-    display: block;
-  }
-  
-  label {
-    display: block;
-    margin-top: 10px;
-    font-weight: 500;
-  }
-/* Setinha para voltar */
-.back-arrow {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #333;
+  max-width: 520px;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
-/* Título */
-.title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #000;
-}
-
-/* Formulário */
-.form input {
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 15px;
-  border: none;
-  border-radius: 8px;
-  background-color: #e9eff7;
-  font-size: 14px;
-}
-/* Agrupa os radios e labels em linha, acima do form */
-radio-group { 
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-.btn {
-  width: 100%;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s;
-}
-
-.btn:hover {
-  background-color: #0056cc;
-}
-
-/* Link de login */
-.login-link {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.login-link a {
-  color: #333;
-  text-decoration: none;
-}
-
-.login-link span {
-  color: #007bff;
-  font-weight: bold;
-}
-/*dark mode&*/
-@media (prefers-color-scheme: dark) {
 /* ============================= */
-/* Reset básico e configurações  */
+/* RÁDIOS */
 /* ============================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: sans-serif;
-}
-
-/* Fundo e centralização */
-body {
-  background-color: #1c1231; /* fundo escuro roxo */
+.radio-group {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  color: #e0e0e0;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
-/* ============================= */
-/* Botões de escolha (Aluno/Professor) */
-/* ============================= */
+.radio-group input[type="radio"] {
+  display: none;
+}
+
 .radio-label {
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #2a1f3d; /* roxo médio */
-  border-radius: 5px;
-  margin: 0 10px;
+  padding: 8px 16px;
+  border: 2px solid;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
   font-weight: 500;
-  color: #e0e0e0;
-  transition: all 0.3s;
-  justify-content: center;
+  user-select: none;
 }
 
-.radio-label:hover {
-  background-color: #3a2a55;
-}
-
-/* Quando o radio correspondente estiver selecionado */
-input[type="radio"]:checked + .radio-label {
-  background-color: #4c3780; /* destaque roxo */
+.radio-group input[type="radio"]:checked + .radio-label {
   color: #fff;
 }
 
 /* ============================= */
-/* Containers de formulário */
-/* ============================= */
-.form {
-  display: none; /* escondido por padrão */
-}
-
-/* Exibe o formulário correspondente */
-#radio-aluno:checked ~ .form-container #form-aluno,
-#radio-professor:checked ~ .form-container #form-professor {
-  display: block;
-}
-
-/* Container principal */
-.form-container {
-  background-color: #2a1f3d; /* fundo do card */
-  padding: 40px 30px;
-  width: 100%;
-  max-width: 360px;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
-  position: relative;
-}
-
-/* ============================= */
-/* Setinha para voltar */
-/* ============================= */
-.back-arrow {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  text-decoration: none;
-  font-size: 20px;
-  color: #ccc;
-  transition: color 0.3s;
-}
-
-.back-arrow:hover {
-  color: #fff;
-}
-
-/* ============================= */
-/* Título */
-/* ============================= */
-.title {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 22px;
-  font-weight: bold;
-  color: #fff;
-}
-
-/* ============================= */
-/* Campos do formulário */
+/* CAMPOS */
 /* ============================= */
 .form input {
   width: 100%;
@@ -248,22 +67,38 @@ input[type="radio"]:checked + .radio-label {
   margin-bottom: 15px;
   border: none;
   border-radius: 8px;
-  background-color: #3b2a57; /* campos escuros */
-  color: #fff;
   font-size: 14px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .form input::placeholder {
-  color: #bdbdbd;
+  opacity: 0.7;
 }
 
 /* ============================= */
-/* Botão de cadastro */
+/* EULA */
+/* ============================= */
+.eula-box {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  text-align: left;
+  font-size: 0.85em;
+  margin: 10px 0 20px;
+}
+
+.eula-box input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* ============================= */
+/* BOTÃO */
 /* ============================= */
 .btn {
   width: 100%;
-  background-color: #007bff;
-  color: white;
   border: none;
   border-radius: 8px;
   padding: 12px;
@@ -274,41 +109,149 @@ input[type="radio"]:checked + .radio-label {
 }
 
 .btn:hover {
-  background-color: #3399ff;
   transform: scale(1.03);
 }
 
 /* ============================= */
-/* Link de login */
+/* LINK DE LOGIN */
 /* ============================= */
 .login-link {
   text-align: center;
   margin-top: 20px;
   font-size: 14px;
-  color: #ccc;
 }
 
 .login-link a {
-  color: #ccc;
   text-decoration: none;
-}
-
-.login-link span {
-  color: #3399ff;
-  font-weight: bold;
-}
-
-.login-link a:hover span {
-  text-decoration: underline;
+  transition: color 0.3s;
 }
 
 /* ============================= */
-/* Grupo de radios */
+/* 🌞 LIGHT MODE */
 /* ============================= */
-radio-group {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 20px;
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: #f5f6fa;
+    color: #333;
+  }
+
+  .wrapper {
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .radio-label {
+    color: #333;
+    border-color: #ccc;
+    background-color: #fff;
+  }
+
+  .radio-label:hover {
+    background-color: #f0f0f0;
+  }
+
+  .radio-group input[type="radio"]:checked + .radio-label {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .form input {
+    background-color: #e9eff7;
+    color: #000;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: #fff;
+  }
+
+  .btn:hover {
+    background-color: #0056cc;
+  }
+
+  .login-link a {
+    color: #333;
+  }
+
+  .login-link span {
+    color: #007bff;
+    font-weight: bold;
+  }
 }
+
+/* ============================= */
+/* 🌙 DARK MODE */
+/* ============================= */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1c1231;
+    color: #e0e0e0;
+  }
+
+  .wrapper {
+    background-color: #2a1f3d;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .radio-label {
+    border-color: #4c3780;
+    color: #ccc;
+    background-color: #2a1f3d;
+  }
+
+  .radio-label:hover {
+    background-color: #3a2a55;
+  }
+
+  .radio-group input[type="radio"]:checked + .radio-label {
+    background-color: #4c3780;
+    border-color: #4c3780;
+  }
+
+  .form input {
+    background-color: #3b2a57;
+    color: #fff;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .btn:hover {
+    background-color: #3399ff;
+  }
+
+  .login-link a {
+    color: #ccc;
+  }
+
+  .login-link span {
+    color: #3399ff;
+    font-weight: bold;
+  }
+}
+
+/* ============================= */
+/* 💻 RESPONSIVIDADE */
+/* ============================= */
+@media (min-width: 768px) {
+  .wrapper {
+    padding: 50px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    padding: 60px 50px;
+  }
+
+  .form input {
+    font-size: 15px;
+  }
+
+  .btn {
+    font-size: 15px;
+    padding: 14px;
+  }
 }

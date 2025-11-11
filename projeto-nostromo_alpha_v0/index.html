@@ -37,13 +37,13 @@
         <div class="login-box">
             <h2>Login</h2>
             <div class="radio-group">
-                <label>
-                    <input type="radio" name="tipo" value="aluno" checked> Aluno
-                </label>
-                <label>
-                    <input type="radio" name="tipo" value="professor"> Professor
-                </label>
-            </div>
+  <input type="radio" id="aluno" name="tipo" value="aluno">
+  <label for="aluno">Aluno</label>
+
+  <input type="radio" id="professor" name="tipo" value="professor">
+  <label for="professor">Professor</label>
+</div>
+
 
             <!-- Definir autocomplete="off" no form e adicionar campos falsos para "enganar" o autofill -->
             <form id="login-form" autocomplete="off" novalidate>

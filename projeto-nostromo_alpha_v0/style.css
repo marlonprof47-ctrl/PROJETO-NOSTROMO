@@ -1,126 +1,5 @@
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-/* Container principal */
-.login-container {
-    background-color: #f6fafe;
-    padding: 40px 30px;
-    border-radius: 10px;
-    width: 320px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* Título */
-.login-box h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #000;
-}
-
-/* Inputs */
-.login-box input[type="email"],
-.login-box input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: none;
-    border-radius: 6px;
-    background-color: #e7eef8;
-    font-size: 14px;
-}
-
 /* ============================= */
-/* Botões de seleção (Aluno/Professor) */
-/* ============================= */
-.radio-group {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.radio-group label {
-  background-color: #1677ff;
-  color: #fff;
-  padding: 8px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.radio-group input[type="radio"] {
-  display: none;
-}
-
-.radio-group input[type="radio"]:checked + label {
-  background-color: #1677ff;
-  color: #fff;
-  font-weight: bold;
-}
-
-/* Link "Esqueceu a senha?" */
-.forgot-password {
-    display: block;
-    text-align: left;
-    font-size: 13px;
-    color: #0f62d1;
-    margin-bottom: 20px;
-    text-decoration: none;
-}
-
-.forgot-password:hover {
-    text-decoration: underline;
-}
-
-/* Botão Entrar */
-.login-box button {
-    width: 100%;
-    padding: 12px;
-    background-color: #1677ff;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-.login-box button:hover {
-    background-color: #0f62d1;
-}
-
-/* Link de criação de conta */
-.signup-link {
-    margin-top: 30px;
-    text-align: center;
-    font-size: 13px;
-}
-
-.signup-link a {
-    text-decoration: none;
-    color: #0f62d1;
-}
-
-.signup-link a:hover {
-    text-decoration: underline;
-}
-@media (prefers-color-scheme: dark) {
-/* dark mode */
-/* ============================= */
-/* Reset básico e configurações  */
+/* RESET BÁSICO */
 /* ============================= */
 * {
   margin: 0;
@@ -128,39 +7,42 @@ body {
   box-sizing: border-box;
 }
 
+/* ============================= */
+/* BASE GERAL */
+/* ============================= */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #1c1231; /* fundo escuro roxo */
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  color: #e0e0e0;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* ============================= */
-/* Container principal */
+/* CONTAINER PRINCIPAL */
 /* ============================= */
 .login-container {
-  background-color: #2a1f3d; /* fundo do card escuro */
+  background-color: #f6fafe;
   padding: 40px 30px;
   border-radius: 10px;
-  width: 320px;
-  box-shadow: 0 0 18px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 420px; /* 🔹 base inicial mais confortável */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
 /* ============================= */
-/* Título */
+/* TÍTULO */
 /* ============================= */
 .login-box h2 {
   text-align: center;
   margin-bottom: 25px;
-  color: #ffffff;
-  font-weight: bold;
+  color: #000;
 }
 
 /* ============================= */
-/* Inputs */
+/* INPUTS */
 /* ============================= */
 .login-box input[type="email"],
 .login-box input[type="password"] {
@@ -169,17 +51,12 @@ body {
   margin-bottom: 15px;
   border: none;
   border-radius: 6px;
-  background-color: #3b2a57; /* roxo médio */
-  color: #fff;
+  background-color: #e7eef8;
   font-size: 14px;
 }
 
-.login-box input::placeholder {
-  color: #bdbdbd;
-}
-
 /* ============================= */
-/* Botões de seleção (Aluno/Professor) */
+/* BOTÕES DE SELEÇÃO (Aluno/Professor) */
 /* ============================= */
 .radio-group {
   display: flex;
@@ -188,33 +65,36 @@ body {
   margin-bottom: 20px;
 }
 
-.radio-group label {
-  background-color: #2a1f3d;
-  color: #ccc;
-  padding: 8px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
 .radio-group input[type="radio"] {
   display: none;
 }
 
+.radio-group label {
+  background-color: #e0e7ff;
+  color: #000;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid #c7d2fe;
+}
+
 .radio-group input[type="radio"]:checked + label {
-  background-color: #4c3780;
+  background-color: #1677ff;
   color: #fff;
   font-weight: bold;
 }
 
+
+
 /* ============================= */
-/* Link "Esqueceu a senha?" */
+/* LINKS E BOTÕES */
 /* ============================= */
 .forgot-password {
   display: block;
   text-align: left;
   font-size: 13px;
-  color: #3399ff;
+  color: #0f62d1;
   margin-bottom: 20px;
   text-decoration: none;
 }
@@ -223,13 +103,10 @@ body {
   text-decoration: underline;
 }
 
-/* ============================= */
-/* Botão Entrar */
-/* ============================= */
 .login-box button {
   width: 100%;
   padding: 12px;
-  background-color: #007bff;
+  background-color: #1677ff;
   color: #fff;
   font-weight: bold;
   border: none;
@@ -240,27 +117,130 @@ body {
 }
 
 .login-box button:hover {
-  background-color: #3399ff;
+  background-color: #0f62d1;
   transform: scale(1.03);
 }
 
-/* ============================= */
-/* Link de criação de conta */
-/* ============================= */
+  .radio:hover {
+    background-color: #f0f0f0;
+  }
+
+
 .signup-link {
   margin-top: 30px;
   text-align: center;
   font-size: 13px;
-  color: #ccc;
 }
 
 .signup-link a {
   text-decoration: none;
-  color: #3399ff;
-  font-weight: bold;
+  color: #0f62d1;
 }
 
 .signup-link a:hover {
   text-decoration: underline;
 }
+
+/* ============================= */
+/* 🌙 DARK MODE */
+/* ============================= */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1c1231;
+    color: #e0e0e0;
+  }
+
+  .login-container {
+    background-color: #2a1f3d;
+    max-width: 520px; /* 🔹 agora igual ao modo claro */
+    padding: 50px 40px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .login-box h2 {
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .login-box input[type="email"],
+  .login-box input[type="password"] {
+    background-color: #3b2a57;
+    color: #fff;
+  }
+
+  .login-box input::placeholder {
+    color: #bdbdbd;
+  }
+
+  .radio-group label {
+    background-color: #2a1f3d;
+    color: #ccc;
+    border: 1px solid #4c3780;
+  }
+
+  .radio-group input[type="radio"]:checked + label {
+    background-color: #4c3780;
+    color: #fff;
+  }
+
+    .radio:hover {
+    background-color: #3a2a55;
+  }
+
+  .forgot-password {
+    color: #3399ff;
+  }
+
+  .login-box button {
+    background-color: #007bff;
+  }
+
+  .login-box button:hover {
+    background-color: #3399ff;
+  }
+
+  .signup-link {
+    color: #ccc;
+  }
+
+  .signup-link a {
+    color: #3399ff;
+    font-weight: bold;
+  }
+}
+
+/* ============================= */
+/* 💻 RESPONSIVIDADE */
+/* ============================= */
+@media (min-width: 768px) {
+  .login-container {
+    max-width: 520px;
+    padding: 60px 50px;
+  }
+
+  .login-box h2 {
+    font-size: 26px;
+  }
+
+  .login-box input[type="email"],
+  .login-box input[type="password"] {
+    font-size: 15px;
+    padding: 14px;
+  }
+
+  .login-box button {
+    font-size: 15px;
+    padding: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-container {
+    max-width: 600px; /* 🔹 aumento sutil para monitores grandes */
+    padding: 70px 60px;
+  }
+
+  .login-box h2 {
+    font-size: 28px;
+  }
 }

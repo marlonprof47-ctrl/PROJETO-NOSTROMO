@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -41,12 +41,15 @@
 </head>
 <body>
 <div class="wrapper">
-    <!-- Radios e labels -->
-    <input type="radio" id="radio-aluno" name="tipo" value="aluno" checked>
-    <label class="radio-label" for="radio-aluno">Aluno</label>
+    <div class="form-container">
+    <div class="radio-group">
+        <input type="radio" id="radio-aluno" name="tipo" value="aluno" checked>
+        <label class="radio-label" for="radio-aluno">Aluno</label>
 
-    <input type="radio" id="radio-professor" name="tipo" value="professor">
-    <label class="radio-label" for="radio-professor">Professor</label>
+        <input type="radio" id="radio-professor" name="tipo" value="professor">
+        <label class="radio-label" for="radio-professor">Professor</label>
+    </div>
+
 
     <!-- Parágrafo para exibir mensagens de sucesso ou erro -->
     <p id="register-message"></p>
@@ -59,12 +62,10 @@
             <input class="hidden-autofill" type="password" name="fake-password-aluno" id="fake-password-aluno" autocomplete="current-password" tabindex="-1" aria-hidden="true">
 
             <input type="text" id="reg-aluno-name" name="name" placeholder="Nome Completo" required autocomplete="off">
-            <input type="email" id="reg-aluno-email" name="email" placeholder="E-mail Institucional" required autocomplete="off">
-            <input type="text" id="reg-aluno-periodo" name="period" placeholder="Período" required autocomplete="off">
+            <input type="email" id="reg-aluno-email" name="email" placeholder="E-mail Institucional" required autocomplete="off"> 
             <input type="password" id="reg-aluno-pass1" name="password" placeholder="Criar Senha" required autocomplete="new-password">
             <input type="password" id="reg-aluno-pass2" name="password_confirm" placeholder="Repetir Senha" required autocomplete="new-password">
             <input type="text" id="reg-aluno-ra" name="ra" placeholder="RA" required autocomplete="off">
-            <input type="text" id="reg-aluno-curso" name="course" placeholder="Curso" required autocomplete="off">
             <div class="eula-box">
                 <input type="checkbox" id="reg-aluno-eula" name="agreed_eula" required>
                 <label for="reg-aluno-eula">Eu li e aceito os termos de uso (EULA).</label>
